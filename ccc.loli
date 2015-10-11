@@ -6,7 +6,7 @@
     (make-user "Mia" "qweasd" 'F nil 85248 20 "Breast Cancer" 100)
     (make-user "Ethan" "asdfgh" 'M nil 85707 14 "Prostate Cancer" 0)))
 
-(def login (\\ :OBJ (uname passwd db)
+(def login (\ :OBJ (uname passwd db)
     (if (eq? db nil)
         #FALSE
         (if (and (eq? (user-get (head db) 'name) uname)
@@ -14,5 +14,20 @@
             (head db)
             (login uname passwd (tail db))))))
 
-(def reg (\\ :OBJ (name pass gender zip age diag loft avatar)
+(def reg (\ :OBJ (name pass gender zip age diag loft avatar)
     (set! user-db (cons (make-user name pass gender nil zip age diag loft avatar) user-db))))
+
+(def lookup-user (\ :user (name db)
+    (if (eq? db nil)
+        nil
+        (if (eq? name (user-get (head db) 'name))
+            (head db)
+            (lookup-user name (tail db))))))
+
+(def connect (\ :BOOL (ua ub)
+    (if (and (member-of? ua (user-get (lookup-user ub) 'connect))
+             (member-of? ub (user-get (lookup-user ua) 'connect)))
+        #TRUE
+        ((\ :OBJ ()
+            (user-set! (lookup-user ua) 'connect (cons ub (user-get (lookup-user ua) 'connect)))
+            (user-set! (lookup-user ub) 'connect (cons ua (user-get (lookup-user ub) 'connect))))))))
