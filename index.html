@@ -24,6 +24,17 @@
                 <div class="navbar-header">
                     <a class="navbar-brand" href="./index">Children's Cancer Connect</a>
                 </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <li class='active'><a href='/'>Home</a></li>
+                    <li><a href='search'>Search</a></li>
+                </div>
+                <div class="nav navbar-nav navbar-right">
+                    <loli-exp>
+                        (if (eq? CURRENT-USER nil)
+                        "<input type='text' id='uname' placeholder='Name' required><input type='password' id='passwd' placeholder='Password' required><button class='btn btn-primary' type='button' onClick='login()'>"
+                        "<a href='profile'>Profile</a>"
+                    </loli-exp>
+                </div>
             </div>
 
 

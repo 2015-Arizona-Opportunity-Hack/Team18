@@ -1,3 +1,5 @@
+(def CURRENT-USER nil)
+
 (defstruct user name pass gender connect zip age diag loft avatar)
 
 (def user-db (list
