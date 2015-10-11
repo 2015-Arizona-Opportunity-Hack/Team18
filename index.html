@@ -13,7 +13,7 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
         <!-- Optional theme -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
-
+        <link href="./navbar-fixed-top.css" rel="stylesheet">
     </head>
     <body>
         <loli-ns>ccc.loli</loli-ns>
@@ -25,17 +25,31 @@
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li class='active'><a href='/'>Home</a></li>
-                        <li><a href='search'>Search</a></li>
+                        <li class='active'><a href='./index.html'>Home</a></li>
+                        <li><a href='./search.html'>Search</a></li>
                         <li><a id='profile'></a></li>
                     </ul>
                 </div>
             </div>
         </nav>
 
-        <!-- Latest compiled and minified JavaScript -->
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        <div class="container">
+
+            <div class="page-header">
+                <h1>Hello. <small id="sub"></small></h1>
+            </div>
+
+            <div id="timeline"></div>
+        </div>
         <script>
+var fake_tl = [{"user": "Vanessa", "content": "I'm feeling better today", "time": "10:15AM"},
+{"user": "Mia", "content": "It's really boring...", "time": "10:02AM"},
+{"user": "CCN Official", "content": "Hey how are you guys doing today?", "time": "9:00AM"}]
+
+for(var i = 0; i < 3; i++){
+    document.getElementById("timeline").innerHTML += "<div class='media'><div class='media-left media-middle'><a href='#'><img width=64x class='media-object' src='./profile_default.png'></a></div><div class='media-body'><h4 class='media-heading'>" + fake_tl[i]["user"] + " : <em>at "  + fake_tl[i]["time"]+ "</em></h4>" + fake_tl[i]["content"] + "</div></div>";
+}
+
 function checklogged(){
     var name = "username=";
     var ca = document.cookie.split(';');
@@ -49,10 +63,18 @@ function checklogged(){
 if(checklogged()){
     document.getElementById("profile").innerHTML = checklogged();
     document.getElementById("profile").setAttribute("href", "./profile.html");
+    EVAL_T_ENV("(def CURRENT-USER \"" + checklogged() + "\")");
+    EVAL_T_ENV("(set! CURRENT-USER \"" + checklogged() + "\")");
+    var zip = EVAL_T_ENV("(user-get (lookup-user CURRENT-USER user-db) 'zip)");
+    $.getJSON("http://api.openweathermap.org/data/2.5/weather?zip=" + zip + ",us&appid=6dbd455d33f149c60205dd8cf22bc6d9&units=imperial", function (data){
+        document.getElementById("sub").innerHTML = data["weather"][0]["main"] + ", " + data["main"]["temp"] + "&#8457 today.";
+    });
 }else{
     document.getElementById("profile").innerHTML = "Login";
     document.getElementById("profile").setAttribute("href", "./login.html");
 }
         </script>
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     </body>
 </html>

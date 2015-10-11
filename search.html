@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en">
     <head>
@@ -13,7 +14,7 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
         <!-- Optional theme -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
- 
+
         <link href="./navbar-fixed-top.css" rel="stylesheet">
     </head>
     <body>
@@ -27,21 +28,21 @@
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         <li><a href='./index.html'>Home</a></li>
-                        <li><a href='./search.html'>Search</a></li>
-                        <li class='active'><a href='./profile.html' id='profile'></a></li>
+                        <li class='active'><a href='./search.html'>Search</a></li>
+                        <li><a id='profile'></a></li>
                     </ul>
                 </div>
             </div>
         </nav>
-
-
         <div class="container">
 
             <div class="page-header">
-                <h1>Welcome. <small>How are you feeling today?</small></h1>
+                <h1>Search. <small>Get to know people like you.</small></h1>
             </div>
 
         </div>
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
         <script>
 function checklogged(){
     var name = "username=";
@@ -53,7 +54,15 @@ function checklogged(){
     }
     return null;
 }
-document.getElementById("profile").innerHTML = checklogged();
+if(checklogged()){
+    document.getElementById("profile").innerHTML = checklogged();
+    document.getElementById("profile").setAttribute("href", "./profile.html");
+    EVAL_T_ENV("(def CURRENT-USER \"" + checklogged() + "\")");
+    EVAL_T_ENV("(set! CURRENT-USER \"" + checklogged() + "\")");
+}else{
+    document.getElementById("profile").innerHTML = "Login";
+    document.getElementById("profile").setAttribute("href", "./login.html");
+}
         </script>
     </body>
 </html>
