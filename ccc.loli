@@ -1,0 +1,18 @@
+(defstruct user name pass gender connect zip age diag loft avatar)
+
+(def user-db (list
+    (make-user "Vanessa" "123456" 'F nil 85014 17 "Myelodysplastic Syndrome" 14)
+    (make-user "Noah" "111111" 'M nil 85014 18 "Bladder Cancer" 31)
+    (make-user "Mia" "qweasd" 'F nil 85248 20 "Breast Cancer" 100)
+    (make-user "Ethan" "asdfgh" 'M nil 85707 14 "Prostate Cancer" 0)))
+
+(def login (\\ :OBJ (uname passwd db)
+    (if (eq? db nil)
+        #FALSE
+        (if (and (eq? (user-get (head db) 'name) uname)
+                 (eq? (user-get (head db) 'pass) passwd))
+            (head db)
+            (login uname passwd (tail db))))))
+
+(def reg (\\ :OBJ (name pass gender zip age diag loft avatar)
+    (set! user-db (cons (make-user name pass gender nil zip age diag loft avatar) user-db))))
