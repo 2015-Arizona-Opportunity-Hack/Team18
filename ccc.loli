@@ -1,5 +1,16 @@
 (def CURRENT-USER nil)
 
+(def log-frame
+    "<button>Login</button>")
+
+(def profile-frame
+    "<a href=\'profile\'>Profile</a>")
+
+(def right-corner (\ :OBJ ()
+    (if (eq? CURRENT-USER nil)
+        "<button>Login</button>"
+        profile-frame)))
+
 (defstruct user name pass gender connect zip age diag loft avatar)
 
 (def user-db (list
@@ -13,7 +24,7 @@
         #FALSE
         (if (and (eq? (user-get (head db) 'name) uname)
                  (eq? (user-get (head db) 'pass) passwd))
-            (head db)
+            (set! CURRENT-USER (head db))
             (login uname passwd (tail db))))))
 
 (def reg (\ :OBJ (name pass gender zip age diag loft avatar)
