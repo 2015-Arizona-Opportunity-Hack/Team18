@@ -1,0 +1,8 @@
+Children's Cancer Connect
+=
+---
+Elevator Pitch: Children's Cancer Network needs a platform for their users to connect with each other (including CCN). And it needs to be able to work with WordPress.
+
+Work Around: Using [LoLi-WF]("https://github.com/Z-Shang/LoLi-WF") intergrated into pure HTML to make this extrmely portable (as easy as copy and paste)
+
+Features: Users can add their informations about Location, Age, Diagnosis, Length of Treatment and find others having similar experience to communicate with.
