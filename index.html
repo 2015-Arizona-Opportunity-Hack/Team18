@@ -29,11 +29,24 @@
                     <li><a href='search'>Search</a></li>
                 </div>
                 <div class="nav navbar-nav navbar-right">
-                    <loli-exp>
-                        (if (eq? CURRENT-USER nil)
-                        "<input type='text' id='uname' placeholder='Name' required><input type='password' id='passwd' placeholder='Password' required><button class='btn btn-primary' type='button' onClick='login()'>"
-                        "<a href='profile'>Profile</a>"
-                    </loli-exp>
+                    <div id="right-corner"></div>
+                    <script>
+                        function checklogged(){
+                            var name = "username=";
+                            var ca = document.cookie.split(';');
+                            for(var i = 0; i < ca.length; i++){
+                                var c = ca[i];
+                                while(c.charAt(0)==' ') c = c.substring(1);
+                                if(c.indexOf(name) == 0) return c.substring(name.length, c.length);
+                            }
+                            return null;
+                        }
+                        if(checklogged()){
+                            document.getElementById("right-corner").innerHTML = checklogged();
+                        }else{
+                            document.getElementById("right-corner").innerHTML = "<a href='login'><button class='btn btn-primary'>Login</button></a>";
+                        }
+                    </script>
                 </div>
             </div>
 
