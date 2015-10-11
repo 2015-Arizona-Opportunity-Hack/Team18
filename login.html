@@ -1,0 +1,54 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>Login</title>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+        <script src="./loli.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+        <!-- Custom styles for this template -->
+        <link href="./signin.css" rel="stylesheet">
+
+    </head>
+
+    <body>
+        <loli-ns>ccc.loli</loli-ns>
+        <div class="container">
+
+            <form class="form-signin">
+                <h2 class="form-signin-heading">Please sign in</h2>
+                <label for="username" class="sr-only">Name</label>
+                <input type="text" id="username" class="form-control" placeholder="Name" required autofocus>
+                <label for="inputPassword" class="sr-only">Password</label>
+                <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+                <button class="btn btn-lg btn-primary btn-block" type="button" onClick="signin()">Sign in</button>
+            </form>
+
+            <script>
+function signin(){
+    var name = document.getElementById("username").value;
+    var passwd = document.getElementById("inputPassword").value;
+    if(EVAL_T_ENV("(login \"" + name + "\" \"" + passwd + "\" user-db)") != "#FALSE"){
+        document.cookie="username=" + name;
+        window.location="./index.html";
+    }else{
+        alert("Wrong User Name and Password combination!");
+    }
+
+}
+            </script>
+        </div> <!-- /container -->
+
+    </body>
+</html>
+
